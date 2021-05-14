@@ -1,0 +1,2 @@
+class ProyectLead < ApplicationRecord
+end
