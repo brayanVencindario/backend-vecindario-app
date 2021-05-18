@@ -19,6 +19,7 @@ gem 'rack-cors'
 gem 'jwt'
 gem 'devise'
 gem 'devise-jwt', '~> 0.7.0'
+gem "rolify"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

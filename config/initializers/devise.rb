@@ -9,25 +9,12 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-
-  # ...
-  config.jwt do |jwt|
-    jwt.secret = ENV['4d1caff8e7f9aad581da979e351a4a94816ea3df80223e9d9c29283ddc76d6fdea572b550ca697a14824ae49704acdcbf350ac52807ad81867849aaaee3ca61c']
-        jwt.dispatch_requests = [
-        ['POST', %r{^/api/login$}]
-      ]
-      jwt.revocation_requests = [
-        ['DELETE', %r{^/api/logout$}]
-      ]
-      jwt.expiration_time = 1.day.to_i
-  end
-
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'a6be7a0ea32d8f37cf0306a54dba1dc5c60e4b672354d97c12a1d56fad79bca7eeee5b71b924a1cc674ee5ca5c2b03cd212c74d1566e06ddb9748787635b116b'
+  # config.secret_key = 'cbf12698e9d115bd43d4f1754fdef16a3c31b08cee064e263052ad6946859c5d24ff006993ca3e3622ede4c1d3564147c4f9de3caf2eca9cf702b64f09b4f1bb'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -139,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '979e4a01ff02d26a582f95bbfa785f372e20ea5ba3a93a78f1f488ba7cd8c6bdff35bc5fad691c59c2b037103a0257365d80a4ad4b86a233ecf7c6b32b1a8064'
+  # config.pepper = '7773a9438b7a5166a51b295fc0edfa31fb854a661eefc6b77e7b075b3ab22241b6d834fd5bba6c05a9f248a1967857fbc01f37a2fec8a41a3842b0d0efce1ecb'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false

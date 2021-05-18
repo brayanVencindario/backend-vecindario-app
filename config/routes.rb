@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :user
-      post '/login', to: 'user#login'
+      post '/user/create', to: 'user#create'
+      post '/user/login', to: 'user#login'
+      get '/user', to: 'user#prueba'
     end
   end
 

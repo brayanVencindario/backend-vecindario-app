@@ -10,15 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_142959) do
+ActiveRecord::Schema.define(version: 2021_05_15_230714) do
 
-  create_table "jwt_denylist", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
-    t.string "jti", null: false
-    t.datetime "expired_at", null: false
-    t.index ["jti"], name: "index_jwt_denylist_on_jti"
-  end
-
-  create_table "leads", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
+  create_table "leads", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
     t.string "email"
@@ -27,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_142959) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "proyect_leads", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
+  create_table "proyect_leads", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "lead_id", null: false
@@ -36,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_142959) do
     t.index ["proyect_id"], name: "index_proyect_leads_on_proyect_id"
   end
 
-  create_table "proyects", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
+  create_table "proyects", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.string "name"
     t.string "type_proyect"
     t.string "city_name"
@@ -51,7 +45,17 @@ ActiveRecord::Schema.define(version: 2021_05_14_142959) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_proyects", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
+  create_table "roles", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "user_proyects", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
@@ -60,15 +64,22 @@ ActiveRecord::Schema.define(version: 2021_05_14_142959) do
     t.index ["user_id"], name: "index_user_proyects_on_user_id"
   end
 
-  create_table "users", charset: "utf8", collation: "utf8_unicode_ci", options: "ENGINE=MyISAM", force: :cascade do |t|
+  create_table "users", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
     t.string "phone"
     t.string "email"
-    t.string "password"
-    t.integer "permission"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users_roles", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
 end

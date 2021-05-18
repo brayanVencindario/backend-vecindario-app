@@ -1,6 +1,8 @@
 class User < ApplicationRecord
+    has_many :user_proyects
+    has_many :users_roles
+    has_secure_password
+    rolify
 
-    devise :database_authenticatable, :registerable,
-    :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
     
 end
