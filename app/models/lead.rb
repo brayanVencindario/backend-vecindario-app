@@ -1,3 +1,4 @@
 class Lead < ApplicationRecord
-    has_many :proyect_leads
+    has_many :proyects
+    
 end

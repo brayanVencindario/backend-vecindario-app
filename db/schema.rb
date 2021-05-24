@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_230714) do
+ActiveRecord::Schema.define(version: 2021_05_18_165042) do
 
   create_table "leads", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
     t.string "name"
@@ -19,15 +19,8 @@ ActiveRecord::Schema.define(version: 2021_05_15_230714) do
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "proyect_leads", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "lead_id", null: false
     t.bigint "proyect_id", null: false
-    t.index ["lead_id"], name: "index_proyect_leads_on_lead_id"
-    t.index ["proyect_id"], name: "index_proyect_leads_on_proyect_id"
+    t.index ["proyect_id"], name: "index_leads_on_proyect_id"
   end
 
   create_table "proyects", charset: "utf8", options: "ENGINE=MyISAM", force: :cascade do |t|

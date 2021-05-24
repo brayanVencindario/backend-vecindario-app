@@ -28,11 +28,12 @@ class Api::V1::UserController < ApplicationController
     # LOGGING IN
     def login
       @user = User.find_by(email: params[:email])
-      @user_role = UsersRole.where(user_id: @user.id).select("role_id as user_info")
--
+      @user_role = UsersRole.where(user_id: @user.id, role_id: 2).select("role_id as user_info")
+      @admin_role = @user_role.empty? ? false : true
+      
       if @user && @user.authenticate(params[:password])
-        token = encode_token({email: @user.email})
-        render json: { token: token, data: @user_role}
+        token = encode_token({email: @user.email, user_infor:@admin_role,user_id:@user.id}) 
+        render json: { token: token, user_info:  @admin_role }
       else
         render json: {error: "Invalid username or password"}
       end
