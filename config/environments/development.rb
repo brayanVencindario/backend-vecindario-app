@@ -27,6 +27,26 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # port 3000 or whatever port you are using for your localhost
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }    
+config.action_mailer.raise_delivery_errors = false
+config.action_mailer.delivery_method = :smtp
+
+# this line is what you want to be true, else you won't get messages!
+config.action_mailer.perform_deliveries = true 
+
+host = 'example.com' #replace with your own url
+config.action_mailer.default_url_options = { host: host }
+
+# SMTP settings for gmail
+config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            => "StudiotopAlerts@gmail.com",
+  :password             => "Stud10t0p4l3rt",
+  :authentication       => "plain",
+  :enable_starttls_auto => true
+}
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 

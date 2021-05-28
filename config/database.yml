@@ -23,5 +23,6 @@ test:
   database: db_poyect_practice
 
 production:
-  <<: *default
-  database: db_poyect_practice
+adapater: postgresql
+encoding: unicode 
+pool: <%= ENV.fetch("RAILS_MAX_THREADS"){5} %>
