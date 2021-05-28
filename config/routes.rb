@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       
 
       post '/lead/create', to: 'lead#create'
-      get '/lead/:projectId', to: 'lead#leadsProject'
+      get '/project/lead/:projectId', to: 'lead#leadsProject'
     end
   end
 

@@ -1,10 +1,16 @@
 class Api::V1::LeadController < ApplicationController
 
+  skip_before_action :authorized, only: [:create]
 
     def create
-        lead = Lead.create(lead_params)
+       lead = Lead.create(lead_params)
+
+        @projectEmail = Proyect.where(id: params[:proyect_id])
+        @salesEmails = @projectEmail[0]['sales_email'].split(',') 
        
         if lead.valid?
+          
+          OrderMailer.new_order_email(@salesEmails, @projectEmail,lead).deliver
 
           render json: {status: :ok, message: 'lead creado correctamente' }
         else
@@ -16,16 +22,10 @@ class Api::V1::LeadController < ApplicationController
       
 
     def leadsProject
-        leadProject = Lead.where(proyect_id: params[:proyect_id])
-      
+        leadProject = Lead.where(proyect_id: params[:projectId])
+       
 
-        if leadProject.empty?
-
-            render json: {message: leadProject, status: :error}
-        else
-            render json: {data: leadProject, projectCounts:leadProject.count, status: :ok}
-      
-        end
+        render json: {data: leadProject, status: :ok}
 
       end
 

@@ -33,15 +33,13 @@ class Api::V1::UserController < ApplicationController
     # LOGGING IN
     def login
       @user = User.find_by(email: params[:email])
-      user_role = UsersRole.where(user_id: @user.id, role_id: 2).select("role_id as user_info")
-      admin_role = user_role.empty? ? false : true
       user_proyects = UserProyect.where(user_id: @user.id).select("proyect_id as data_user")
       
       if @user && @user.authenticate(params[:password])
         token = encode_token({email: @user.email,user_id:@user.id}) 
-        render json: { token: token, user_email:@user.email,data:user_proyects, status: :ok}
+        render json: { token: token, user_email:@user.email, status: :ok}
       else
-        render json: {error: "Nombre de usuario o contraseña incorrecta"}
+        render json: {error: "Nombre de usuario o contraseña incorrecta", status: :error}
       end
     end
   
