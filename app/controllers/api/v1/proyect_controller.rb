@@ -47,14 +47,15 @@ class Api::V1::ProyectController < ApplicationController
         end
       end
 
+   
 
-      def getProjectInfo
+      def projectInfo
         @ProyectInfo = Proyect.where(id: params[:projectId])
         
        
         if @ProyectInfo.empty?
 
-            render json: {message: "ocurrio un error porfavor intente de nuevo", status: :error}
+            render json: {message: "ocurrio un error porfavor intente de nuevoss", status: :error}
         else
        
 
@@ -65,7 +66,7 @@ class Api::V1::ProyectController < ApplicationController
 
        
     def proyect_params
-        params.permit(:name, :type_proyect,:city_name,:proyect_address, :price ,:area,:vis_value, :bathrooms_numbres, :parking_lot,:sales_email )
+        params.permit(:name, :type_proyect,:city_name,:proyect_address, :price ,:privateArea,:builtArea,:vis_value, :bathrooms_numbres, :parking_lot,:sales_email )
       end
 
 

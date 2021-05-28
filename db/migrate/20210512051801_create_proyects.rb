@@ -6,7 +6,8 @@ class CreateProyects < ActiveRecord::Migration[6.1]
       t.string :city_name
       t.string :proyect_address
       t.float :price
-      t.string :area
+      t.string :privateArea
+      t.string :builtArea
       t.integer :vis_value
       t.integer :bathrooms_numbres
       t.integer :parking_lot

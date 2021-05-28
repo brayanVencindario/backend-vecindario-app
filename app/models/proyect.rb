@@ -2,7 +2,8 @@ class Proyect < ApplicationRecord
 
 
     has_many :user_proyects
-    belongs_to :leads
+    has_many :leads
+    
     
 
 
@@ -11,7 +12,8 @@ class Proyect < ApplicationRecord
     validates :city_name, presence: true
     validates :proyect_address, presence: true
     validates :price, presence: true
-    validates :area, presence: true
+    validates :privateArea, presence: true
+    validates :builtArea, presence: true
     validates :vis_value, presence: true
     validates :bathrooms_numbres, presence: true
     validates :parking_lot, presence: true

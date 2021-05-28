@@ -2,9 +2,9 @@ class Api::V1::LeadController < ApplicationController
 
 
     def create
-        @lead = Lead.create(lead_params)
+        lead = Lead.create(lead_params)
        
-        if @lead.valid?
+        if lead.valid?
 
           render json: {status: :ok, message: 'lead creado correctamente' }
         else
@@ -16,14 +16,14 @@ class Api::V1::LeadController < ApplicationController
       
 
     def leadsProject
-        @leadProject = Lead.where(proyect_id: params[:projectId])
+        leadProject = Lead.where(proyect_id: params[:proyect_id])
       
 
-        if @leadProject.empty?
+        if leadProject.empty?
 
-            render json: {message: "ocurrio un error porfavor intente de nuevo", status: :error}
+            render json: {message: leadProject, status: :error}
         else
-            render json: {data: @leadProject, projectCounts:@leadProject.count, status: :ok}
+            render json: {data: leadProject, projectCounts:leadProject.count, status: :ok}
       
         end
 
